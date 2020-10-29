@@ -1,0 +1,9 @@
+name: YYSMending
+main: io.github.euonmyoji.pooltouhouinterface.bukkit.PoolTouhouInterface
+version: 0.1.0
+commands:
+  pooltouhouinterface:
+    description: PoolTouhouInterface
+    usage: /pthi
+    aliases:
+      - pthi
