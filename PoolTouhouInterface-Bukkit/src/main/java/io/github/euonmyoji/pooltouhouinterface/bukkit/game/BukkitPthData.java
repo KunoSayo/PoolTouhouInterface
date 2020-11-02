@@ -26,9 +26,9 @@ import java.util.UUID;
  * @author yinyangshi
  */
 public class BukkitPthData extends PthData implements Runnable {
-    public final Random random = new Random();
+    public Random random;
     private final UUID uuid;
-    private final int playerEID = random.nextInt(random.nextInt(Integer.MAX_VALUE));
+    private int playerEID;
     public HashMap<String, ScriptData> scripts = new HashMap<>();
 
 
@@ -70,6 +70,9 @@ public class BukkitPthData extends PthData implements Runnable {
 
     @Override
     protected void setup() {
+        random = new Random();
+        playerEID = random.nextInt(random.nextInt(Integer.MAX_VALUE));
+
         EnemyBullet[] enemyBullets = new EnemyBullet[4096];
         for (int i = 0; i < enemyBullets.length; i++) {
             enemyBullets[i] = new EnemyBulletImpl(this);
