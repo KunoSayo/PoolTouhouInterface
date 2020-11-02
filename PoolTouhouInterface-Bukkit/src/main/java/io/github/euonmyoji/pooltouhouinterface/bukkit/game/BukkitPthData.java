@@ -93,6 +93,7 @@ public class BukkitPthData extends PthData implements Runnable {
             try {
                 scripts.put(name, scriptData = new ScriptData(this, name, PoolTouhouInterface.scriptDir.resolve(name + ".pthpsb")));
             } catch (IOException e) {
+                System.out.println("loading script " + name + " failed.");
                 e.printStackTrace();
             }
         }

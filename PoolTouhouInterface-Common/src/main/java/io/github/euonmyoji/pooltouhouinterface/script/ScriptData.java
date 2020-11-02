@@ -198,42 +198,55 @@ public class ScriptData {
                 }
                 case 16: {
                     commands.add(runner -> runner.pthData.scriptCallback.add(new Kill()));
+                    break;
                 }
                 case 20: {
                     storeF32(in, scriptFunction);
+                    break;
                 }
                 case 21: {
                     commands.add(runner -> runner.pthData.calcStack.add());
+                    break;
                 }
                 case 22: {
                     commands.add(runner -> runner.pthData.calcStack.sub());
+                    break;
                 }
                 case 23: {
                     commands.add(runner -> runner.pthData.calcStack.mul());
+                    break;
                 }
                 case 24: {
                     commands.add(runner -> runner.pthData.calcStack.div());
+                    break;
                 }
                 case 25: {
                     commands.add(runner -> runner.pthData.calcStack.mod());
+                    break;
                 }
                 case 26: {
                     commands.add(runner -> runner.pthData.calcStack.eq());
+                    break;
                 }
                 case 27: {
                     commands.add(runner -> runner.pthData.calcStack.nq());
+                    break;
                 }
                 case 28: {
                     commands.add(runner -> runner.pthData.calcStack.lt());
+                    break;
                 }
                 case 29: {
                     commands.add(runner -> runner.pthData.calcStack.gt());
+                    break;
                 }
                 case 30: {
                     commands.add(runner -> runner.pthData.calcStack.le());
+                    break;
                 }
                 case 31: {
                     commands.add(runner -> runner.pthData.calcStack.ge());
+                    break;
                 }
                 case 38: {
                     ScriptDataSupplier scriptDataSupplier = loadF32(in, scriptFunction);
@@ -244,6 +257,7 @@ public class ScriptData {
                         pthData.calcStack.push(v);
                         setter.set(runner);
                     });
+                    break;
                 }
                 case 39: {
                     ScriptDataSupplier scriptDataSupplier = loadF32(in, scriptFunction);
@@ -254,6 +268,7 @@ public class ScriptData {
                         pthData.calcStack.push(v);
                         setter.set(runner);
                     });
+                    break;
                 }
                 //ret (nothing)
                 case 2:
