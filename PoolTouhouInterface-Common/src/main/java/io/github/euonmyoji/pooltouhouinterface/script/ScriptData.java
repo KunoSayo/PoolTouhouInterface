@@ -69,6 +69,7 @@ public class ScriptData {
                     } else {
                         break loop;
                     }
+                    break;
                 }
                 case 1: {
                     loops += 1;
@@ -126,10 +127,12 @@ public class ScriptData {
                 case 6: {
                     ScriptDataSupplier b = loadF32(in, scriptFunction);
                     commands.add(runner -> runner.context.wait = (int) Math.floor(b.get(runner)));
+                    break;
                 }
                 case 10: {
                     ScriptDataSupplier b = loadF32(in, scriptFunction);
                     commands.add(runner -> runner.pthData.scriptCallback.add(new MoveUp(b.get(runner))));
+                    break;
                 }
                 case 11: {
                     String name = in.readUTF();
@@ -161,6 +164,7 @@ public class ScriptData {
 
                     commands.add(runner -> runner.pthData.summonEnemy(name, xS.get(runner), yS.get(runner), hpS.get(runner),
                             collideType, argsS, scriptData, runner, aiArgsArrayS));
+                    break;
                 }
                 case 12: {
                     String name = in.readUTF();

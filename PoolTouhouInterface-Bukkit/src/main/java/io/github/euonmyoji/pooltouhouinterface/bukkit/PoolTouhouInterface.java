@@ -4,6 +4,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import io.github.euonmyoji.pooltouhouinterface.PthData;
 import io.github.euonmyoji.pooltouhouinterface.bukkit.game.BukkitPthData;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,12 +57,12 @@ public class PoolTouhouInterface extends JavaPlugin implements Listener {
                     String scriptToInit = args[1];
                     Player player = ((Player) sender);
 
-                    new Thread(() -> {
+                    Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
                         PthData old = runningGame.put(player.getUniqueId(), new BukkitPthData(player, scriptToInit));
                         if (old != null) {
                             old.running = false;
                         }
-                    }).start();
+                    });
                     return true;
                 }
                 case "stop": {

@@ -26,10 +26,10 @@ import java.util.UUID;
  * @author yinyangshi
  */
 public class BukkitPthData extends PthData implements Runnable {
-    public Random random;
     private final UUID uuid;
-    private int playerEID;
+    public Random random;
     public HashMap<String, ScriptData> scripts = new HashMap<>();
+    private int playerEID;
 
 
     public BukkitPthData(Player player, String main) {
@@ -65,7 +65,7 @@ public class BukkitPthData extends PthData implements Runnable {
             e.printStackTrace();
         }
 
-        run();
+        new Thread(this).start();
     }
 
     @Override
@@ -124,7 +124,7 @@ public class BukkitPthData extends PthData implements Runnable {
             for (int by = (int) this.y; by <= this.y + DY; by += 1) {
                 for (int bz = (int) this.z; bz <= this.z + DZ; bz += 1) {
                     PacketContainer block = PoolTouhouInterface.protocolManager.createPacket(PacketType.Play.Server.BLOCK_CHANGE);
-                    block.getBlockPositionModifier().write(0, new BlockPosition((int) this.x, by, bz));
+                    block.getBlockPositionModifier().write(0, new BlockPosition((int) this.x + 1, by, bz));
                     block.getBlockData().write(0, WrappedBlockData.createData(Material.AIR));
                     try {
                         PoolTouhouInterface.protocolManager.sendServerPacket(player, block);
