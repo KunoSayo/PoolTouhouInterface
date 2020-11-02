@@ -20,6 +20,10 @@ public class CalcStack {
         return stack[top--];
     }
 
+    public int getTop() {
+        return top;
+    }
+
     public void add() {
         double v = stack[top];
         top -= 1;
@@ -79,7 +83,6 @@ public class CalcStack {
         double v = stack[top];
         top -= 1;
         stack[top] = stack[top] <= v ? 1.0 : 0.0;
-
     }
 
     public void ge() {

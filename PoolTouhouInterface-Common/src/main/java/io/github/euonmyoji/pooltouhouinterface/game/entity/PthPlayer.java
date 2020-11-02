@@ -3,6 +3,8 @@ package io.github.euonmyoji.pooltouhouinterface.game.entity;
 import io.github.euonmyoji.pooltouhouinterface.PthData;
 
 /**
+ * the x is in pth x
+ * the y is in pth y
  * @author yinyangshi
  */
 public abstract class PthPlayer {
@@ -18,6 +20,8 @@ public abstract class PthPlayer {
     public abstract void tick();
 
     public abstract void biu();
+
+    public abstract void destroy();
 
     /*
      * the (yaw, pitch) in the minecraft F3 (1.16.3 with OPTIFINE)
@@ -62,9 +66,8 @@ public abstract class PthPlayer {
 
     private void changeIfInGame(double y, double z) {
         if (y >= pthData.y && y <= pthData.y + PthData.DY && z >= pthData.z && z <= pthData.z + PthData.DZ) {
-            //noinspection SuspiciousNameCombination
-            this.x = y;
-            this.y = z;
+            this.x = (y - pthData.y) * 12.5;
+            this.y = (z - pthData.z) * 12.5;
             pthData.runner.px = this.x;
             pthData.runner.py = this.y;
         }

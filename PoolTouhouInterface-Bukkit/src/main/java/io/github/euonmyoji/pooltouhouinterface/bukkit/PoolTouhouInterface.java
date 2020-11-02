@@ -73,6 +73,16 @@ public class PoolTouhouInterface extends JavaPlugin implements Listener {
                     }
                     break;
                 }
+                case "debug": {
+                    PthData.debug = true;
+                    return true;
+                }
+                case "info": {
+                    PthData pthData = runningGame.get(((Player) sender).getUniqueId());
+                    sender.sendMessage("Bullets: " + pthData.enemyBullets.count());
+                    sender.sendMessage("Enemies: " + pthData.enemies.count());
+                    return true;
+                }
                 default: {
                     break;
                 }

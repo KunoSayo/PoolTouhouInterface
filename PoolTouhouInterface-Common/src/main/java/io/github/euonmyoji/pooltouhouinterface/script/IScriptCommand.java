@@ -5,6 +5,7 @@ package io.github.euonmyoji.pooltouhouinterface.script;
  */
 @FunctionalInterface
 public interface IScriptCommand {
+
     /**
      * 执行相关操作
      *

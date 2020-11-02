@@ -20,6 +20,7 @@ public class ScriptRunner {
     }
 
     public void run() {
+        int start = pthData.calcStack.getTop();
         while (context.pointer < function.commands.length) {
             function.commands[context.pointer].exe(this);
             context.pointer += 1;
@@ -27,6 +28,9 @@ public class ScriptRunner {
                 context.wait -= 1;
                 return;
             }
+        }
+        if(pthData.calcStack.getTop() - start > 0) {
+            System.out.println("not balance!");
         }
         context.pointer = 0;
     }

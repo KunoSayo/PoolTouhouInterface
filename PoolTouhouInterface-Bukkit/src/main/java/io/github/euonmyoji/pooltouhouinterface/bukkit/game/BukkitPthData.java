@@ -26,21 +26,22 @@ import java.util.UUID;
  * @author yinyangshi
  */
 public class BukkitPthData extends PthData implements Runnable {
-    private final UUID uuid;
+    public final UUID uuid;
+    public Player mcPlayer;
     public Random random;
     public HashMap<String, ScriptData> scripts = new HashMap<>();
-    private int playerEID;
 
 
     public BukkitPthData(Player player, String main) {
         super();
+        this.mcPlayer = player;
         Location location = player.getLocation();
         this.x = location.getBlockX() + 32;
         this.y = location.getBlockY() - 36;
         this.z = location.getBlockZ() - 64;
         this.uuid = player.getUniqueId();
 
-        this.player = new PlayerImpl(this, player, this.y + 36, this.z + 64);
+        this.player = new PlayerImpl(this, player);
 
         for (int by = (int) this.y; by <= this.y + DY; by += 1) {
             for (int bz = (int) this.z; bz <= this.z + DZ; bz += 1) {
@@ -71,7 +72,6 @@ public class BukkitPthData extends PthData implements Runnable {
     @Override
     protected void setup() {
         random = new Random();
-        playerEID = random.nextInt(random.nextInt(Integer.MAX_VALUE));
 
         EnemyBullet[] enemyBullets = new EnemyBullet[4096];
         for (int i = 0; i < enemyBullets.length; i++) {
@@ -102,9 +102,10 @@ public class BukkitPthData extends PthData implements Runnable {
 
     @Override
     public void run() {
-        final double msPer = 1000.0 / 60.0;
+        final double msPer = 1000.0 / 20.0;
         long last = System.currentTimeMillis();
         while (running) {
+            this.mcPlayer = Bukkit.getPlayer(this.uuid);
             super.tick();
             long now = System.currentTimeMillis();
             long delta = now - last;
@@ -119,28 +120,23 @@ public class BukkitPthData extends PthData implements Runnable {
             last = now;
         }
 
-        Player player = Bukkit.getServer().getPlayer(uuid);
-        if (player != null) {
+        mcPlayer = Bukkit.getServer().getPlayer(uuid);
+        if (mcPlayer != null) {
             for (int by = (int) this.y; by <= this.y + DY; by += 1) {
                 for (int bz = (int) this.z; bz <= this.z + DZ; bz += 1) {
                     PacketContainer block = PoolTouhouInterface.protocolManager.createPacket(PacketType.Play.Server.BLOCK_CHANGE);
                     block.getBlockPositionModifier().write(0, new BlockPosition((int) this.x + 1, by, bz));
                     block.getBlockData().write(0, WrappedBlockData.createData(Material.AIR));
                     try {
-                        PoolTouhouInterface.protocolManager.sendServerPacket(player, block);
+                        PoolTouhouInterface.protocolManager.sendServerPacket(mcPlayer, block);
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
                     }
                 }
             }
 
-            PacketContainer des = PoolTouhouInterface.protocolManager.createPacket(PacketType.Play.Server.ENTITY_DESTROY);
-            des.getIntegerArrays().write(0, new int[]{playerEID});
-            try {
-                PoolTouhouInterface.protocolManager.sendServerPacket(player, des);
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
         }
+        this.player.destroy();
+        this.mcPlayer = null;
     }
 }
