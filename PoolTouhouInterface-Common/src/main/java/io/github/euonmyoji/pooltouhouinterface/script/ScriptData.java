@@ -47,7 +47,7 @@ public class ScriptData {
         LinkedList<IScriptCommand> commands = new LinkedList<>();
         LinkedList<Loop> loopMarks = new LinkedList<>();
         int loops = 0;
-        if(PthData.debug) {
+        if (PthData.debug) {
             System.out.println("[loading function " + funName + " in script " + this.name);
         }
         loop:
@@ -65,7 +65,7 @@ public class ScriptData {
                                 Loop loop = runner.function.loops[i];
                                 if (loop.pointer < runner.context.pointer) {
                                     if (loop.type == Loop.Type.START) {
-                                        if(l == 0) {
+                                        if (l == 0) {
                                             runner.context.pointer = loop.pointer;
                                             return;
                                         } else {
@@ -359,7 +359,7 @@ public class ScriptData {
                 }
             }
         }
-        if(PthData.debug) {
+        if (PthData.debug) {
             System.out.println("[Function loaded]");
         }
         scriptFunction.commands = commands.toArray(new IScriptCommand[0]);

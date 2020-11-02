@@ -29,7 +29,7 @@ public class ScriptRunner {
                 return;
             }
         }
-        if(pthData.calcStack.getTop() - start > 0) {
+        if (pthData.calcStack.getTop() - start > 0) {
             System.out.println("not balance!");
         }
         context.pointer = 0;

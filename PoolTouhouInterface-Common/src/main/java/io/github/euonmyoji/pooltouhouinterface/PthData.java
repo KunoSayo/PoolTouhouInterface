@@ -35,7 +35,6 @@ public abstract class PthData {
     public double x;
     public double y;
     public double z;
-    protected PthPlayer player;
     /**
      * the bullet in the game
      * do not tick if the tick num = 0
@@ -46,6 +45,7 @@ public abstract class PthData {
      * do not tick if the tick num = 0
      */
     public UnsafeObjectPool<Enemy> enemies;
+    protected PthPlayer player;
 
     protected PthData() {
         setup();

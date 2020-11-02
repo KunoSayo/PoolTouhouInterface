@@ -10,13 +10,13 @@ public abstract class EnemyBullet extends PthEntity {
 
     public void setAngle(double angle) {
         this.angle = angle;
-        double a = (angle + 90) * Math.PI / 180.0;
-        dx = Math.sin(a);
-        dy = Math.cos(a);
+        double a = angle * Math.PI / 180.0;
+        dx = Math.cos(a);
+        dy = Math.sin(a);
     }
 
     public void moveUp(double v) {
-        this.x += dx * v;
-        this.y += dy * v;
+        this.x += -dy * v;
+        this.y += dx * v;
     }
 }

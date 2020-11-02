@@ -38,8 +38,8 @@ public class EnemyBulletImpl extends EnemyBullet {
                     .write(6, 0);
             stgPlayerSpawn.getUUIDs().write(0, uuid);
             stgPlayerSpawn.getDoubles().write(0, pthData.x)
-                    .write(1, (this.x / PthData.SCALE) + pthData.y)
-                    .write(2, (this.y / PthData.SCALE) + pthData.z);
+                    .write(1, (this.y / PthData.SCALE) + pthData.y)
+                    .write(2, (this.x / PthData.SCALE) + pthData.z);
             try {
                 PoolTouhouInterface.protocolManager.sendServerPacket(pthData.mcPlayer, stgPlayerSpawn);
             } catch (InvocationTargetException e) {
@@ -56,7 +56,7 @@ public class EnemyBulletImpl extends EnemyBullet {
             move.getBytes().writeDefaults();
             move.getIntegers().write(0, eId);
             move.getBooleans().write(0, false);
-            move.getDoubles().write(0, pthData.x).write(1, (this.x / PthData.SCALE) + pthData.y).write(2, (this.y / PthData.SCALE) + pthData.z);
+            move.getDoubles().write(0, pthData.x).write(1, (this.y / PthData.SCALE) + pthData.y).write(2, (this.x / PthData.SCALE) + pthData.z);
             try {
                 PoolTouhouInterface.protocolManager.sendServerPacket(this.pthData.mcPlayer, move);
             } catch (InvocationTargetException e) {

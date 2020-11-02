@@ -26,7 +26,7 @@ public class ObjectCollectionTest {
 
         int i = 0;
         while (it.hasNext()) {
-            if(++it.next()[0] == 3) {
+            if (++it.next()[0] == 3) {
                 it.remove();
             }
             if (i++ <= 1) {

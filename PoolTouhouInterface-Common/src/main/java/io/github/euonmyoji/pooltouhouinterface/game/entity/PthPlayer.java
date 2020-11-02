@@ -5,6 +5,7 @@ import io.github.euonmyoji.pooltouhouinterface.PthData;
 /**
  * the x is in pth x
  * the y is in pth y
+ *
  * @author yinyangshi
  */
 public abstract class PthPlayer {

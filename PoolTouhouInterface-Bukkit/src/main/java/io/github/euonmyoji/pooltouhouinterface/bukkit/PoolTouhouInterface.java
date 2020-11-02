@@ -102,5 +102,6 @@ public class PoolTouhouInterface extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         protocolManager = ProtocolLibrary.getProtocolManager();
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
 }

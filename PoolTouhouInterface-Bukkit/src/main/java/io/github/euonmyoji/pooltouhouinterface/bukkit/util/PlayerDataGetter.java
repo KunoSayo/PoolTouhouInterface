@@ -13,13 +13,13 @@ import java.util.UUID;
  * @author yinyangshi
  */
 public class PlayerDataGetter implements Runnable {
+    private final PthData pthData;
     public UUID uuid;
     public volatile double x;
     public volatile double y;
     public volatile double z;
     public volatile double yaw;
     public volatile double pitch;
-    private final PthData pthData;
 
     public PlayerDataGetter(UUID uuid, BukkitPthData pthData) {
         this.uuid = uuid;
