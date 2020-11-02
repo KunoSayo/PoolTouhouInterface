@@ -56,11 +56,12 @@ public class PoolTouhouInterface extends JavaPlugin implements Listener {
                     String scriptToInit = args[1];
                     Player player = ((Player) sender);
 
-                    //todo: not done yet
-                    PthData old = runningGame.put(player.getUniqueId(), new BukkitPthData(player, scriptToInit));
-                    if (old != null) {
-                        old.running = false;
-                    }
+                    new Thread(() -> {
+                        PthData old = runningGame.put(player.getUniqueId(), new BukkitPthData(player, scriptToInit));
+                        if (old != null) {
+                            old.running = false;
+                        }
+                    }).start();
                     return true;
                 }
                 case "stop": {
