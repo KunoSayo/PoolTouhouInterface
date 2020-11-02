@@ -1,4 +1,4 @@
-name: YYSMending
+name: PoolTouhouInterface
 main: io.github.euonmyoji.pooltouhouinterface.bukkit.PoolTouhouInterface
 version: 0.1.0
 commands:

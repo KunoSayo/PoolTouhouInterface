@@ -14,12 +14,12 @@ import java.util.UUID;
  */
 public class PlayerDataGetter implements Runnable {
     public UUID uuid;
-    private PthData pthData;
     public volatile double x;
     public volatile double y;
     public volatile double z;
     public volatile double yaw;
     public volatile double pitch;
+    private final PthData pthData;
 
     public PlayerDataGetter(UUID uuid, BukkitPthData pthData) {
         this.uuid = uuid;
@@ -30,7 +30,7 @@ public class PlayerDataGetter implements Runnable {
     @Override
     public void run() {
         CraftPlayer player = ((CraftPlayer) Bukkit.getServer().getPlayer(uuid));
-        if(player != null) {
+        if (player != null) {
             Location location = player.getEyeLocation();
 
             x = location.getX();
@@ -39,7 +39,7 @@ public class PlayerDataGetter implements Runnable {
             yaw = location.getYaw();
             pitch = location.getPitch();
         }
-        if(pthData.running) {
+        if (pthData.running) {
             Bukkit.getScheduler().runTaskLater(PoolTouhouInterface.plugin, this, 1);
         }
     }

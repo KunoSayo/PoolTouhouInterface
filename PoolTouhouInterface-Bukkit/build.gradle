@@ -9,6 +9,9 @@ version = "${bukkitVersion}"
 
 repositories {
     mavenCentral()
+
+    //plib
+    maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
 }
 
 
@@ -22,6 +25,7 @@ dependencies {
 
     compile project(":PoolTouhouInterface-Common")
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.1";
 }
 
 artifacts {

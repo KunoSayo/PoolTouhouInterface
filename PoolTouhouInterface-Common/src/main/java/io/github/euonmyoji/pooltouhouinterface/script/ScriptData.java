@@ -22,6 +22,7 @@ public class ScriptData {
     public HashMap<String, ScriptFunction> functions = new HashMap<>();
     public int version;
     public short dataCount;
+    public ScriptFunction tickFunction;
 
 
     public ScriptData(PthData pthData, String name, Path scriptPath) throws IOException {
@@ -34,6 +35,7 @@ public class ScriptData {
                 ScriptFunction function = loadFunction(pthData, in);
                 functions.put(funName, function);
             }
+            tickFunction = functions.remove("tick");
         }
     }
 
@@ -62,7 +64,7 @@ public class ScriptData {
                                 }
                             }
                         });
-                        loopMarks.add(new Loop(Loop.Type.END, commands.size()));
+                        loopMarks.add(new Loop(Loop.Type.END, commands.size() - 1));
                         loops -= 1;
                     } else {
                         break loop;
@@ -70,7 +72,7 @@ public class ScriptData {
                 }
                 case 1: {
                     loops += 1;
-                    loopMarks.add(new Loop(Loop.Type.START, commands.size()));
+                    loopMarks.add(new Loop(Loop.Type.START, commands.size() - 1));
                     break;
                 }
                 case 3: {
@@ -123,12 +125,7 @@ public class ScriptData {
                 }
                 case 6: {
                     ScriptDataSupplier b = loadF32(in, scriptFunction);
-                    commands.add(runner -> {
-                        int wait = (int) Math.floor(b.get(runner));
-                        if (wait > 0) {
-                            runner.context.wait = wait - 1;
-                        }
-                    });
+                    commands.add(runner -> runner.context.wait = (int) Math.floor(b.get(runner)));
                 }
                 case 10: {
                     ScriptDataSupplier b = loadF32(in, scriptFunction);

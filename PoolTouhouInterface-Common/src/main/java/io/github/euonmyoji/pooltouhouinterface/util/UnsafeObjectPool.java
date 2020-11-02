@@ -5,6 +5,7 @@ import java.util.Iterator;
 /**
  * A not-ordered collection for object
  * if you are reading from iterator and allocated object, you will read the object that just allocated.
+ *
  * @param <E> The element type
  * @author yinyangshi
  */
