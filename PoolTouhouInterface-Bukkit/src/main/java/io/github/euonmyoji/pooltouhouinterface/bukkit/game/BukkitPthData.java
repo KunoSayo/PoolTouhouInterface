@@ -57,7 +57,7 @@ public class BukkitPthData extends PthData implements Runnable {
 
         try {
             ScriptData data = new ScriptData(this, main, PoolTouhouInterface.scriptDir.resolve(main + ".pthpsb"));
-            runner.function = data.functions.get("main");
+            runner.function = data.functions.get("start");
             runner.context = new ScriptContext(data.dataCount, runner.function.maxStack);
             runner.run();
         } catch (IOException e) {
